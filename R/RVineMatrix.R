@@ -64,7 +64,7 @@
 #' @param names A vector of names for the d variables; default: \code{names =
 #' NULL}.
 #' @param check.pars logical; default is \code{TRUE}; if \code{FALSE}, checks
-#' for family/parameter-consistency are ommited (should only be used with
+#' for family/parameter-consistency are omitted (should only be used with
 #' care).
 #'
 #' @return An object of class \code{\link{RVineMatrix}}, i.e., a list with the
@@ -81,7 +81,7 @@
 #' \itemize{
 #' \item{\code{"C-vine": }}{all trees consist of a star,}
 #' \item{\code{"D-vine": }}{all trees consist of a path,}
-#' \item{\code{"R-vine": }}{all strucutres that are neither a C- nor D-vine,}
+#' \item{\code{"R-vine": }}{all structures that are neither a C- nor D-vine,}
 #' }}
 #' \item{tau}{Kendall's tau matrix,}
 #' \item{taildep}{matrices of lower and upper tail dependence coefficients,}
@@ -550,7 +550,10 @@ is.DVine <- function(Matrix) {
         Matrix <- Matrix$Matrix
     Matrix <- reorderRVineMatrix(Matrix)
     d <- nrow(Matrix)
-    length(unique(Matrix[d, ])) == d - 1
+    nums <- c(diag(Matrix)[seq_len(d - 1)], Matrix[d, seq_len(d - 1)])
+    repcount <- table(table(nums))
+    # no node in more than two edges, only 2 nodes in one edge
+    (max(as.numeric(names(repcount))) == 2) && (repcount[1] == 2)
 }
 
 ## A C-vine has a star in each tree
@@ -775,7 +778,7 @@ vinvstepb <- function(A, i, ichk0 = 0) {
 #' The given matrix is tested to be a valid R-vine matrix.
 #'
 #'
-#' @param M A dxd vine matrix.
+#' @param M A \eqn{dxd} vine matrix.
 #' @return \item{code}{ \code{1} for OK; \cr
 #' \code{-4} matrix is neither lower nor upper triangular;\cr
 #' \code{-3} diagonal can not be put in order d:1;\cr
