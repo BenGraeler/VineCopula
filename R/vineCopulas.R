@@ -100,10 +100,10 @@ vineCopula <- function (RVM, type="CVine") { # RVM <- 4L
 
   new("vineCopula", copulas=copulas, dimension = as.integer(nrow(RVM$Matrix)),
       RVM=RVM,
-      parameters = unlist(sapply(copulas, function(x) x@parameters)),
-      param.names = unlist(sapply(copulas, function(x) x@param.names)),
-      param.lowbnd = unlist(sapply(copulas, function(x) x@param.lowbnd)),
-      param.upbnd = unlist(sapply(copulas, function(x) x@param.upbnd)),
+      parameters = unlist(sapply(copulas, function(x) if(class(x) == "indepCopula") return(NA) else x@parameters)),
+      param.names = unlist(sapply(copulas, function(x) if(class(x) == "indepCopula") return(NA) else  x@param.names)),
+      param.lowbnd = unlist(sapply(copulas, function(x) if(class(x) == "indepCopula") return(NA) else x@param.lowbnd)),
+      param.upbnd = unlist(sapply(copulas, function(x) if(class(x) == "indepCopula") return(NA) else x@param.upbnd)),
       fullname = paste("RVine copula family."))
 }
 
