@@ -5,8 +5,9 @@
 \title{Sequential Pair-Copula Selection and Estimation for R-Vine Copula Models}
 \usage{
 RVineCopSelect(data, familyset = NA, Matrix, selectioncrit = "AIC",
-  indeptest = FALSE, level = 0.05, trunclevel = NA, se = FALSE,
-  rotations = TRUE, method = "mle", cores = 1)
+  indeptest = FALSE, level = 0.05, trunclevel = NA, weights = NA,
+  rotations = TRUE, se = FALSE, presel = TRUE, method = "mle",
+  cores = 1)
 }
 \arguments{
 \item{data}{N x d data matrix (with uniform margins).}
@@ -38,11 +39,17 @@ hypothesis of independence cannot be rejected.}
 
 \item{trunclevel}{integer; level of truncation.}
 
-\item{se}{Logical; whether standard errors are estimated (default: \code{se
-= FALSE}).}
+\item{weights}{Numerical; weights for each observation (optional).}
 
 \item{rotations}{logical; if \code{TRUE}, all rotations of the families in
 \code{familyset} are included.}
+
+\item{se}{Logical; whether standard errors are estimated (default: \code{se
+= FALSE}).}
+
+\item{presel}{Logical; whether to exclude families before fitting based on
+symmetry properties of the data. Makes the selection about 30\% faster
+(on average), but may yield slightly worse results in few special cases.}
 
 \item{method}{indicates the estimation method: either maximum
 likelihood estimation (\code{method = "mle"}; default) or inversion of
@@ -52,10 +59,10 @@ one parameter families and the Student t copula can be used (\code{family =
 \code{par2} is found by a crude profile likelihood optimization over the
 interval (2, 10].}
 
-\item{cores}{integer; if \code{cores > 1}, estimation will be parallized
+\item{cores}{integer; if \code{cores > 1}, estimation will be parallelized
 within each tree (using \code{\link[foreach]{foreach}}). Note that
 parallelization causes substantial overhead and may be slower than
-single-threaded computation when dimension, sample size, or familyset are
+single-threaded computation when dimension, sample size, or family set are
 small or \code{method = "itau"}.}
 }
 \value{
