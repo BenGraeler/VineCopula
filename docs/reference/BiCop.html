@@ -8,21 +8,29 @@
 
 <title>Constructing BiCop-objects — BiCop • VineCopula</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,11 +38,11 @@
 
 
 
-<meta property="og:title" content="Constructing BiCop-objects — BiCop" />
 
+<meta property="og:title" content="Constructing BiCop-objects — BiCop" />
 <meta property="og:description" content="This function creates an object of class BiCop and checks for
 family/parameter consistency." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -48,9 +56,10 @@ family/parameter consistency." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -64,7 +73,7 @@ family/parameter consistency." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">VineCopula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">2.4.0</span>
       </span>
     </div>
 
@@ -72,7 +81,7 @@ family/parameter consistency." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -83,11 +92,10 @@ family/parameter consistency." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/tnagler/VineCopula">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/tnagler/VineCopula/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -98,6 +106,7 @@ family/parameter consistency." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -109,14 +118,12 @@ family/parameter consistency." />
     </div>
 
     <div class="ref-description">
-    
     <p>This function creates an object of class <code>BiCop</code> and checks for
 family/parameter consistency.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>BiCop</span>(<span class='no'>family</span>, <span class='no'>par</span>, <span class='kw'>par2</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>tau</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>check.pars</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -134,35 +141,32 @@ family/parameter consistency.</p>
 <code>8</code> = BB6 copula <br />
 <code>9</code> = BB7 copula <br />
 <code>10</code> = BB8 copula <br />
-<code>13</code> = rotated Clayton copula (180 degrees; ``survival Clayton'') <br />
-<code>14</code> = rotated Gumbel copula (180 degrees; ``survival Gumbel'') <br />
-<code>16</code> = rotated Joe copula (180 degrees; ``survival Joe'') <br />
-<code>17</code> = rotated BB1 copula (180 degrees; ``survival BB1'')<br />
-<code>18</code> = rotated BB6 copula (180 degrees; ``survival BB6'')<br />
-<code>19</code> = rotated BB7 copula (180 degrees; ``survival BB7'')<br />
+<code>13</code> = rotated Clayton copula (180 degrees; <code>survival Clayton'') \cr `14` = rotated Gumbel copula (180 degrees; </code>survival Gumbel'') <br />
+<code>16</code> = rotated Joe copula (180 degrees; <code>survival Joe'') \cr `17` = rotated BB1 copula (180 degrees; </code>survival BB1'')<br />
+<code>18</code> = rotated BB6 copula (180 degrees; <code>survival BB6'')\cr `19` = rotated BB7 copula (180 degrees; </code>survival BB7'')<br />
 <code>20</code> = rotated BB8 copula (180 degrees; ``survival BB8'')<br />
 <code>23</code> = rotated Clayton copula (90 degrees) <br />
-<code>24</code> = rotated Gumbel copula (90 degrees) <br />
-<code>26</code> = rotated Joe copula (90 degrees) <br />
-<code>27</code> = rotated BB1 copula (90 degrees) <br />
-<code>28</code> = rotated BB6 copula (90 degrees) <br />
-<code>29</code> = rotated BB7 copula (90 degrees) <br />
-<code>30</code> = rotated BB8 copula (90 degrees) <br />
-<code>33</code> = rotated Clayton copula (270 degrees) <br />
-<code>34</code> = rotated Gumbel copula (270 degrees) <br />
-<code>36</code> = rotated Joe copula (270 degrees) <br />
-<code>37</code> = rotated BB1 copula (270 degrees) <br />
-<code>38</code> = rotated BB6 copula (270 degrees) <br />
-<code>39</code> = rotated BB7 copula (270 degrees) <br />
-<code>40</code> = rotated BB8 copula (270 degrees) <br />
-<code>104</code> = Tawn type 1 copula <br />
-<code>114</code> = rotated Tawn type 1 copula (180 degrees) <br />
-<code>124</code> = rotated Tawn type 1 copula (90 degrees) <br />
-<code>134</code> = rotated Tawn type 1 copula (270 degrees) <br />
-<code>204</code> = Tawn type 2 copula <br />
-<code>214</code> = rotated Tawn type 2 copula (180 degrees) <br />
-<code>224</code> = rotated Tawn type 2 copula (90 degrees) <br />
-<code>234</code> = rotated Tawn type 2 copula (270 degrees) <br /></p></td>
+`24` = rotated Gumbel copula (90 degrees) <br />
+`26` = rotated Joe copula (90 degrees) <br />
+`27` = rotated BB1 copula (90 degrees) <br />
+`28` = rotated BB6 copula (90 degrees) <br />
+`29` = rotated BB7 copula (90 degrees) <br />
+`30` = rotated BB8 copula (90 degrees) <br />
+`33` = rotated Clayton copula (270 degrees) <br />
+`34` = rotated Gumbel copula (270 degrees) <br />
+`36` = rotated Joe copula (270 degrees) <br />
+`37` = rotated BB1 copula (270 degrees) <br />
+`38` = rotated BB6 copula (270 degrees) <br />
+`39` = rotated BB7 copula (270 degrees) <br />
+`40` = rotated BB8 copula (270 degrees) <br />
+`104` = Tawn type 1 copula <br />
+`114` = rotated Tawn type 1 copula (180 degrees) <br />
+`124` = rotated Tawn type 1 copula (90 degrees) <br />
+`134` = rotated Tawn type 1 copula (270 degrees) <br />
+`204` = Tawn type 2 copula <br />
+`214` = rotated Tawn type 2 copula (180 degrees) <br />
+`224` = rotated Tawn type 2 copula (90 degrees) <br />
+`234` = rotated Tawn type 2 copula (270 degrees) <br /></p></td>
     </tr>
     <tr>
       <th>par</th>
@@ -188,10 +192,10 @@ for family/parameter-consistency are omitted (should only be used with
 care).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>BiCop</code>. It is a list containing
+    <p>An object of class <code>BiCop()</code>. It is a list containing
 information about the bivariate copula. Its components are:</p>
 <dt>family, par, par2</dt><dd><p>copula family number and parameter(s),</p></dd>
 <dt>npars</dt><dd><p>number of parameters,</p></dd>
@@ -200,26 +204,23 @@ information about the bivariate copula. Its components are:</p>
 <dt>beta</dt><dd><p>Blomqvist's beta,</p></dd>
 <dt>taildep</dt><dd><p>lower and upper tail dependence coefficients,</p></dd>
 <dt>call</dt><dd><p>the call that created the object.</p></dd>
-Objects of this class are also returned by the <a href='BiCopEst.html'>BiCopEst</a> and
-<a href='BiCopSelect.html'>BiCopSelect</a> functions. In this case, further information about
+Objects of this class are also returned by the <a href='BiCopEst.html'>BiCopEst()</a> and
+<a href='BiCopSelect.html'>BiCopSelect()</a> functions. In this case, further information about
 the fit is added.
 
-    
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>For a comprehensive summary of the model, use <code><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary(object)</a></code>;
-to see all its contents, use <code><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str(object)</a></code>.</p>
-    
+    <p>For a comprehensive summary of the model, use <code><a href='https://rdrr.io/r/base/summary.html'>summary(object)</a></code>;
+to see all its contents, use <code><a href='https://rdrr.io/r/utils/str.html'>str(object)</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='BiCopPDF.html'>BiCopPDF</a></code>,
-<code><a href='BiCopHfunc.html'>BiCopHfunc</a></code>,
-<code><a href='BiCopSim.html'>BiCopSim</a></code>,
-<code><a href='BiCopEst.html'>BiCopEst</a></code>,
-<code><a href='BiCopSelect.html'>BiCopSelect</a></code>,
-<code><a href='plot.BiCop.html'>plot.BiCop</a></code>,
-<code><a href='plot.BiCop.html'>contour.BiCop</a></code></p></div>
-    
+    <div class='dont-index'><p><code><a href='BiCopPDF.html'>BiCopPDF()</a></code>,
+<code><a href='BiCopHfunc.html'>BiCopHfunc()</a></code>,
+<code><a href='BiCopSim.html'>BiCopSim()</a></code>,
+<code><a href='BiCopEst.html'>BiCopEst()</a></code>,
+<code><a href='BiCopSelect.html'>BiCopSelect()</a></code>,
+<code><a href='plot.BiCop.html'>plot.BiCop()</a></code>,
+<code><a href='plot.BiCop.html'>contour.BiCop()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
@@ -227,7 +228,7 @@ to see all its contents, use <code><a href='https://www.rdocumentation.org/packa
 <span class='no'>obj</span> <span class='kw'>&lt;-</span> <span class='fu'>BiCop</span>(<span class='kw'>family</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>par</span> <span class='kw'>=</span> <span class='fl'>0.4</span>, <span class='kw'>par2</span> <span class='kw'>=</span> <span class='fl'>6</span>)
 <span class='no'>obj</span></div><div class='output co'>#&gt; Bivariate copula: t (par = 0.4, par2 = 6, tau = 0.26) </div><div class='input'>
 <span class='co'>## see the object's content or a summary</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>obj</span>)</div><div class='output co'>#&gt; List of 9
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>obj</span>)</div><div class='output co'>#&gt; List of 9
 #&gt;  $ family    : num 2
 #&gt;  $ par       : num 0.4
 #&gt;  $ par2      : num 6
@@ -239,7 +240,7 @@ to see all its contents, use <code><a href='https://www.rdocumentation.org/packa
 #&gt;   ..$ lower: num 0.127
 #&gt;   ..$ upper: num 0.127
 #&gt;  $ call      : language BiCop(family = 2, par = 0.4, par2 = 6)
-#&gt;  - attr(*, "class")= chr "BiCop"</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>obj</span>)</div><div class='output co'>#&gt; Family
+#&gt;  - attr(*, "class")= chr "BiCop"</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>obj</span>)</div><div class='output co'>#&gt; Family
 #&gt; ------ 
 #&gt; No:    2
 #&gt; Name:  t
@@ -256,7 +257,7 @@ to see all its contents, use <code><a href='https://www.rdocumentation.org/packa
 #&gt; </div><div class='input'>
 <span class='co'>## a selection of functions that can be used with BiCop objects</span>
 <span class='no'>simdata</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='BiCopSim.html'>BiCopSim</a></span>(<span class='fl'>300</span>, <span class='no'>obj</span>)  <span class='co'># simulate data</span>
-<span class='fu'><a href='BiCopPDF.html'>BiCopPDF</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='no'>obj</span>) <span class='co'># evaluate density in (0.5,0.5)</span></div><div class='output co'>#&gt; [1] 1.185466</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>obj</span>)  <span class='co'># surface plot of copula density</span></div><div class='img'><img src='BiCop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/contour'>contour</a></span>(<span class='no'>obj</span>)  <span class='co'># contour plot with standard normal margins</span></div><div class='img'><img src='BiCop-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/print'>print</a></span>(<span class='no'>obj</span>)  <span class='co'># brief overview of BiCop object</span></div><div class='output co'>#&gt; Bivariate copula: t (par = 0.4, par2 = 6, tau = 0.26) </div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/summary'>summary</a></span>(<span class='no'>obj</span>)  <span class='co'># comprehensive overview of BiCop object</span></div><div class='output co'>#&gt; Family
+<span class='fu'><a href='BiCopPDF.html'>BiCopPDF</a></span>(<span class='fl'>0.5</span>, <span class='fl'>0.5</span>, <span class='no'>obj</span>) <span class='co'># evaluate density in (0.5,0.5)</span></div><div class='output co'>#&gt; [1] 1.185466</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>obj</span>)  <span class='co'># surface plot of copula density</span></div><div class='img'><img src='BiCop-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/contour.html'>contour</a></span>(<span class='no'>obj</span>)  <span class='co'># contour plot with standard normal margins</span></div><div class='img'><img src='BiCop-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>obj</span>)  <span class='co'># brief overview of BiCop object</span></div><div class='output co'>#&gt; Bivariate copula: t (par = 0.4, par2 = 6, tau = 0.26) </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>obj</span>)  <span class='co'># comprehensive overview of BiCop object</span></div><div class='output co'>#&gt; Family
 #&gt; ------ 
 #&gt; No:    2
 #&gt; Name:  t
@@ -273,24 +274,13 @@ to see all its contents, use <code><a href='https://www.rdocumentation.org/packa
 #&gt; </div><div class='input'>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#note">Note</a></li>
-
-      <li><a href="#see-also">See also</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Thomas Nagler</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -298,13 +288,16 @@ to see all its contents, use <code><a href='https://www.rdocumentation.org/packa
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
